@@ -1,5 +1,6 @@
 import { argv, stdin as input, stdout as output } from 'node:process';
 import * as fs from 'fs';
+import { createScanner, Scanner } from './scanner';
 
 // @ts-ignore
 const readline = require('readline');
@@ -35,7 +36,10 @@ function startLox(args: string[]) {
   }
 
   function run(line: string) {
-    console.log(line);
+    const scanner: Scanner = createScanner(line);
+    const tokens = scanner.scanTokens();
+    console.log(tokens);
+
     if(hadError) process.exit(1);
   }
 
